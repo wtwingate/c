@@ -52,23 +52,21 @@ void detab(char to[], char from[])
 	int column;
 	int spaces;
 
-	column = 1;
+	column = 0;
+	spaces = 0;
 	i = j = 0;
 	while (from[j] != '\0') {
 		if (from[j] == '\t') {
 			spaces = TABSTOP - (column % TABSTOP);
-			while (spaces >= 0) {
-				to[i] = ' ';
+			while (spaces > 0) {
+				to[i++] = ' ';
 				column++;
-				i++;
 				spaces--;
 			}
 			j++;
 		} else {
-			to[i] = from[j];
+			to[i++] = from[j++];
 			column++;
-			i++;
-			j++;
 		}
 	}
 	to[i] = from[j];
