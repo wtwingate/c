@@ -50,15 +50,18 @@ void detab(char to[], char from[])
 	int i;
 	int j;
 	int column;
+	int spaces;
 
 	column = 1;
 	i = j = 0;
 	while (from[j] != '\0') {
 		if (from[j] == '\t') {
-			while (TABSTOP - (column % TABSTOP) > 0) {
+			spaces = TABSTOP - (column % TABSTOP);
+			while (spaces >= 0) {
 				to[i] = ' ';
 				column++;
 				i++;
+				spaces--;
 			}
 			j++;
 		} else {
